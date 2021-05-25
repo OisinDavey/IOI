@@ -1,8 +1,10 @@
+
 //
 // ~oisín~ C++ Template
 //
 
 #include                <bits/stdc++.h>
+#include                "combo.h"
 #define MX_N            5001
 #define mp              make_pair
 #define mod7            1000000007
@@ -35,28 +37,20 @@ const long long INF = 1e18;
 
 using namespace std;
 
-string ANS = "ABXYY";
-
-int calls = 0;
-
-int press(string s){
-    ++calls;
-    int maxd = 0;
-    for(int i=0;i<s.size();++i){
-        for(int j=0;j<ANS.size();++j){
-            if(i+j >= s.size()){
-                break;
-            }
-            if(s[i+j] != ANS[j]){
-                break;
-            }
-            maxd = max(maxd, j+1);
-        }
-    }
-    return maxd;
-}
-
 string guess_sequence(int N){
+    if(N == 1){
+        int temp1 = press("A");
+        int temp2 = press("B");
+        int temp3 = press("X");
+        if(temp1)
+            return "A";
+        else if(temp2)
+            return "B";
+        else if(temp3)
+            return "X";
+        else
+            return "Y";
+    }
     //Find first character
     string S = "";
     if(1){
@@ -113,10 +107,4 @@ string guess_sequence(int N){
         }
     }
     return S;
-}
-
-int main(){
-    cin >> ANS;
-    cout << guess_sequence(ANS.size()) << endl;
-    cout << calls << endl;
 }
